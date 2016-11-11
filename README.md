@@ -10,6 +10,6 @@ For this project, I developed a single page application featuring a map of my ne
 
 To use this application, clone or download the repository and open the `index.html` document.  The map application will render in your browser.  You can explore the content by:
 
-* Selecting the map markers displayed on the map
+* Selecting the map markers displaying on the map
 * Selecting the hamburger-menu icon in the upper left corner, then choosing a location from the list that displays
-* The search functionality displaying above the list lets you filter locations by title
+* Using the search functionality above the list to filter locations by title
