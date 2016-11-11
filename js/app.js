@@ -9,8 +9,8 @@ function initMap() {
 	});
 
 	$('#menu').on('click', function() {
-        $('body').toggleClass('menu-hidden');
-    });	
+		$('body').toggleClass('menu-hidden');
+	});	
 
 	ko.applyBindings(new ViewModel);
 };
@@ -70,11 +70,8 @@ var ViewModel = function() {
 
 	//use the marker click event on our HTML list items
 	self.list = function (place, marker) {
-        google.maps.event.trigger(place.marker, 'click');
-        setTimeout(function() {
-        	$('body').toggleClass('menu-hidden');	
-        }, 250);
-    };
+		google.maps.event.trigger(place.marker, 'click');
+	};
 
 	//place markers on map by iterating through placeIndex
 	self.placeIndex.forEach( function(place) {
@@ -89,15 +86,17 @@ var ViewModel = function() {
 		//add a click event-listener to each marker instance
 		place.marker.addListener('click', function() {
 			markerClick();
-			if ( $('body').hasClass('') ) {
-				setTimeout(function() {
-        			$('body').toggleClass('menu-hidden');	
-        		}, 250);
-			};
 		});
 
 		//declare how the marker should respond on click
 		function markerClick() {
+			//check if menu is visible, then hide it
+			if ( $('body').hasClass('') ) {
+				setTimeout(function() {
+					$('body').toggleClass('menu-hidden');	
+				}, 250);
+			};
+			
 			//create bounce effect on click
 			if(place.marker.getAnimation() !== null) {
 				place.marker.setAnimation(null);
@@ -130,34 +129,34 @@ var ViewModel = function() {
 		handleImage = function(place) {
 			//use marker position properties to capture latitude and longitude
 			var lat = place.marker.position.lat().toString();
-  			var lng = place.marker.position.lng().toString();
-  			//create string for latitude and longitude of clicked marker
-  			var location = lat + ", " + lng;
-  			//add string to googlestreetview URL
-  			var imgSrc = "https://maps.googleapis.com/maps/api/streetview?location=" + location + "&size=600x300" + "&key=AIzaSyCcv1EjRfx93K6_x1QuIocTsz-2r1Qu8DQ";
-  			//set the modal picture using the googlestreetview URL
-  			$("#pic").attr("src", imgSrc);
+			var lng = place.marker.position.lng().toString();
+			//create string for latitude and longitude of clicked marker
+			var location = lat + ", " + lng;
+			//add string to googlestreetview URL
+			var imgSrc = "https://maps.googleapis.com/maps/api/streetview?location=" + location + "&size=600x300" + "&key=AIzaSyCcv1EjRfx93K6_x1QuIocTsz-2r1Qu8DQ";
+			//set the modal picture using the googlestreetview URL
+			$("#pic").attr("src", imgSrc);
 		};
 
 		//function to collect the modal's text conted based on marker clicked
 		handleText = function(place) {
 			//send JSON request to wikipedia using the marker title as the search term
 			$.getJSON("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=" + place.marker.title + "&origin=*", function(data) {
-    			//capture the object id for the object returned by json request
-    			var id = Object.keys(data.query.pages);
-    			//handle no result found...
-    			if (id < 0) {
-    				$('.textContent').html("<em>Whoops... the content you've requested could not be retrieved.</em>");
-    			} else {
-    				//convert object id to number
-    				var pageid = Number(id);
-    				//use object id to index content and place in modal
-    				$('.textContent').html(data.query.pages[pageid].extract);
-    			}
-  			})
-  			.fail(function() {
-  				alert("We're having difficulty accessing Wikipedia for a description of this location. Please try again later.");
-  			});
+				//capture the object id for the object returned by json request
+				var id = Object.keys(data.query.pages);
+				//handle no result found...
+				if (id < 0) {
+					$('.textContent').html("<em>Whoops... the content you've requested could not be retrieved.</em>");
+				} else {
+					//convert object id to number
+					var pageid = Number(id);
+					//use object id to index content and place in modal
+					$('.textContent').html(data.query.pages[pageid].extract);
+				}
+			})
+			.fail(function() {
+				alert("We're having difficulty accessing Wikipedia for a description of this location. Please try again later.");
+			});
 		};
 	});
 };
