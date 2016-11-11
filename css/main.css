@@ -1,0 +1,65 @@
+html,
+body,
+.container,
+.map,
+#map {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.nav {
+	background-color: black;
+	padding: 1em;
+	color: white;
+}
+
+.nav p {
+	font-size: 1.5em;
+}
+
+#menu {
+	font-size: 1.5em;
+}
+
+.search {
+	background-color: rgba(0, 0, 0, 0.9);
+	padding: 1em;
+}
+
+
+.list {
+	background-color: rgba(0, 0, 0, 0.6);
+	color: white;
+	height: 100%;
+}
+
+.list li {
+	padding: .5em;
+}
+
+.places-container {
+    position: absolute;
+    height: 80%;
+    width: 15em;
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.2s;
+    z-index: 2;
+}
+
+.menu-hidden .places-container {
+    transform: translate3d(-20em, 0, 0);
+    transition: transform 0.5s;
+}
+
+
+#map: {
+	position: relative;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+
+}
