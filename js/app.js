@@ -108,7 +108,7 @@ var ViewModel = function() {
 				place.marker.setAnimation(google.maps.Animation.BOUNCE);
 				setTimeout(function() {
 					place.marker.setAnimation(null);
-				}, 3000);
+				}, 1400);
 			};
 
 			//run functions for that marker to create modal data
@@ -120,7 +120,7 @@ var ViewModel = function() {
 			//to loading modal data
 			setTimeout(function() {
 				$('#myModal').modal('show');
-			}, 1000);
+			}, 1500);
 		}
 
 		//function to collect the modal header based on the marker clicked
