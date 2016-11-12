@@ -13,7 +13,11 @@ function initMap() {
 	});	
 
 	ko.applyBindings(new ViewModel);
-};
+}
+
+function noMap() {
+	alert("We're having difficulty communicating with Google Maps.  We apologize for any inconvenience.");
+}
 
 //create place constructor
 var Place = function(place) {
