@@ -121,7 +121,7 @@ var ViewModel = function() {
 			setTimeout(function() {
 				$('#myModal').modal('show');
 			}, 1000);
-		};
+		}
 
 		//function to collect the modal header based on the marker clicked
 		handleHeader = function(place) {
