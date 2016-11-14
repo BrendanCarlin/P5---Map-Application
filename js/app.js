@@ -77,6 +77,10 @@ var ViewModel = function() {
 		google.maps.event.trigger(place.marker, 'click');
 	};
 
+	self.titleHeader = ko.observable('');
+	self.imgSource = ko.observable('');
+	self.details = ko.observable();
+
 	//place markers on map by iterating through placeIndex
 	self.placeIndex.forEach( function(place) {
 		place.marker = new google.maps.Marker({
@@ -84,13 +88,14 @@ var ViewModel = function() {
 			title: place.title,
 			icon: place.icon,
 			animation: google.maps.Animation.DROP,
-			map: map
+			map: map,
 		});
 
 		//add a click event-listener to each marker instance
 		place.marker.addListener('click', function() {
 			markerClick();
 		});
+
 
 		//declare how the marker should respond on click
 		function markerClick() {
@@ -126,7 +131,7 @@ var ViewModel = function() {
 		//function to collect the modal header based on the marker clicked
 		handleHeader = function(place) {
 			var title = place.marker.title;
-			$('.modal-title').html(title);
+			self.titleHeader(title);
 		};
 
 		//function to collect the modal's image content based on marker clicked
@@ -139,7 +144,7 @@ var ViewModel = function() {
 			//add string to googlestreetview URL
 			var imgSrc = "https://maps.googleapis.com/maps/api/streetview?location=" + location + "&size=600x300" + "&key=AIzaSyCcv1EjRfx93K6_x1QuIocTsz-2r1Qu8DQ";
 			//set the modal picture using the googlestreetview URL
-			$("#pic").attr("src", imgSrc);
+			self.imgSource(imgSrc);
 		};
 
 		//function to collect the modal's text conted based on marker clicked
@@ -150,12 +155,12 @@ var ViewModel = function() {
 				var id = Object.keys(data.query.pages);
 				//handle no result found...
 				if (id < 0) {
-					$('.textContent').html("<em>Whoops... the content you've requested could not be retrieved.</em>");
+					self.details("<em>Whoops... the content you've requested could not be retrieved.</em>");
 				} else {
 					//convert object id to number
 					var pageid = Number(id);
 					//use object id to index content and place in modal
-					$('.textContent').html(data.query.pages[pageid].extract);
+					self.details(data.query.pages[pageid].extract);
 				}
 			})
 			.fail(function() {
