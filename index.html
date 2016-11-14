@@ -54,12 +54,12 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title"></h4>
+					<h4 class="modal-title" data-bind="text: titleHeader"></h4>
 				</div>
 
 				<div class="modal-body">
-					<img src="https://i.ytimg.com/vi/htOroIbxiFY/hqdefault.jpg" class="img-responsive" id="pic">
-					<div class="textContent"></div>
+					<img data-bind="attr: {src: imgSource}" class="img-responsive" id="pic">
+					<div class="textContent" data-bind="html: details"></div>
 				</div>
 
 				<div class="modal-footer">
